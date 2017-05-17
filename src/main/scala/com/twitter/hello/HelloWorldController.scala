@@ -13,4 +13,8 @@ class HelloWorldController extends Controller {
   post("/hi") { hiRequest: HiRequest =>
     "Hello " + hiRequest.name + " with id " + hiRequest.id
   }
+
+  get("/") { request: Request =>
+    response.ok.file("graphiql.html")
+  }
 }
