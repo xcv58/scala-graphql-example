@@ -17,4 +17,8 @@ class HelloWorldController extends Controller {
   get("/") { request: Request =>
     response.ok.file("graphiql.html")
   }
+
+  post("/graphql") { request: Request =>
+    response.ok.body(request.contentString)
+  }
 }
