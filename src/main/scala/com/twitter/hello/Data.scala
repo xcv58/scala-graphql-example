@@ -1,3 +1,5 @@
+package com.twitter.hello
+
 object Episode extends Enumeration {
   val NEWHOPE, EMPIRE, JEDI = Value
 }

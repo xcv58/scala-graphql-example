@@ -1,3 +1,5 @@
+package com.twitter.hello
+
 import sangria.execution.deferred.{Fetcher, HasId}
 import sangria.schema._
 
