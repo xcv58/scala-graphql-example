@@ -2,6 +2,17 @@ package com.twitter.hello
 
 import com.twitter.finagle.http.Request
 import com.twitter.finatra.http.Controller
+import sangria.execution.Executor
+import sangria.execution.deferred.DeferredResolver
+import sangria.parser.QueryParser
+import scala.concurrent.ExecutionContext.Implicits.global
+
+import scala.util.{Failure, Success}
+
+case class GraphQLRequest(
+  query: String,
+  operationName: Option[String]
+)
 
 class HelloWorldController extends Controller {
 
@@ -18,7 +29,15 @@ class HelloWorldController extends Controller {
     response.ok.file("graphiql.html")
   }
 
-  post("/graphql") { request: Request =>
-    response.ok.body(request.contentString)
+  post("/graphql") { request: GraphQLRequest =>
+    QueryParser.parse(request.query) match {
+      case Success(queryAst) => Executor.execute(
+        SchemaDefinition.StarWarsSchema,
+        queryAst,
+        new CharacterRepo,
+        deferredResolver = DeferredResolver.fetchers(SchemaDefinition.characters)
+      )
+      case Failure(error) => error
+    }
   }
 }
