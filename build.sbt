@@ -15,7 +15,7 @@ scalacOptions ++= Seq(
 
 libraryDependencies ++= Seq(
   "com.twitter" %% "finatra-http" % "2.10.0",
-  "org.sangria-graphql" %% "sangria" % "1.2.0",
+  "org.sangria-graphql" %% "sangria" % "1.2.1",
 
   // testing
   "org.scalatest" %% "scalatest" % "3.0.3" % "test",
