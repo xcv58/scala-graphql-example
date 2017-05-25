@@ -18,9 +18,11 @@ scalacOptions ++= Seq(
   "-Xlint:-missing-interpolator")
 
 libraryDependencies ++= Seq(
+  "ch.qos.logback" % "logback-classic" % versions.logback,
   "com.twitter" %% "finatra-http" % "2.10.0",
   "org.sangria-graphql" %% "sangria" % "1.2.1",
-  "ch.qos.logback" % "logback-classic" % versions.logback,
+  "org.sangria-graphql" %% "sangria-json4s-jackson" % "1.0.0",
+  "org.json4s" %% "json4s-jackson" % "3.5.2",
 
   // testing
   "org.scalatest" %% "scalatest" % "3.0.3" % "test",
