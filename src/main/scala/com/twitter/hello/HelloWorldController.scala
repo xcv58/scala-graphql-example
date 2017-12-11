@@ -54,7 +54,7 @@ class HelloWorldController extends Controller {
     "Hello " + hiRequest.name + " with id " + hiRequest.id
   }
 
-  get("/") { request: Request =>
+  get("/graphql") { request: Request =>
     response.ok.file("graphiql.html")
   }
 
