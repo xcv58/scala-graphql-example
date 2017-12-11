@@ -20,6 +20,7 @@ scalacOptions ++= Seq(
 libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % versions.logback,
   "com.twitter" %% "finatra-http" % "17.11.0",
+  "com.twitter" %% "bijection-util" % "0.9.6",
   "org.sangria-graphql" %% "sangria" % "1.3.3",
   "org.sangria-graphql" %% "sangria-json4s-jackson" % "1.0.0",
   "org.json4s" %% "json4s-jackson" % "3.5.3",
