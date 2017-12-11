@@ -1,4 +1,4 @@
-package com.twitter.hello
+package com.xcv58.graphql
 
 case class HiRequest(
   id: Long,

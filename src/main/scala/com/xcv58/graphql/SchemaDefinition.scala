@@ -1,4 +1,4 @@
-package com.twitter.hello
+package com.xcv58.graphql
 
 import sangria.execution.deferred.{Fetcher, HasId}
 import sangria.schema._

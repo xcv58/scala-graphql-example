@@ -9,7 +9,7 @@ lazy val versions = new {
   val logback = "1.1.7"
 }
 
-scalaVersion := "2.12.2"
+scalaVersion := "2.12.4"
 
 scalacOptions ++= Seq(
   "-deprecation",
@@ -19,14 +19,15 @@ scalacOptions ++= Seq(
 
 libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % versions.logback,
-  "com.twitter" %% "finatra-http" % "2.10.0",
-  "org.sangria-graphql" %% "sangria" % "1.2.1",
+  "com.twitter" %% "finatra-http" % "17.11.0",
+  "com.twitter" %% "bijection-util" % "0.9.6",
+  "org.sangria-graphql" %% "sangria" % "1.3.3",
   "org.sangria-graphql" %% "sangria-json4s-jackson" % "1.0.0",
-  "org.json4s" %% "json4s-jackson" % "3.5.2",
+  "org.json4s" %% "json4s-jackson" % "3.5.3",
 
   // testing
-  "org.scalatest" %% "scalatest" % "3.0.3" % "test",
-  "eu.timepit" %% "refined" % "0.7.0" % Test
+  "org.scalatest" %% "scalatest" % "3.0.4" % "test",
+  "eu.timepit" %% "refined" % "0.8.4" % Test
 )
 
 testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oF")

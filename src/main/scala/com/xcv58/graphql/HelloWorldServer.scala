@@ -1,4 +1,4 @@
-package com.twitter.hello
+package com.xcv58.graphql
 
 import com.twitter.finagle.http.{Request, Response}
 import com.twitter.finatra.http.HttpServer
