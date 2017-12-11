@@ -1,4 +1,4 @@
-package com.twitter.hello
+package com.xcv58.graphql
 
 object Episode extends Enumeration {
   val NEWHOPE, EMPIRE, JEDI = Value

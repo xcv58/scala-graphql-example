@@ -1,4 +1,4 @@
-package com.twitter.hello
+package com.xcv58.graphql
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.twitter.bijection.twitter_util.UtilBijections.twitter2ScalaFuture

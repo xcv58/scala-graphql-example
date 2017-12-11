@@ -1,8 +1,6 @@
-package com.twitter.hello
+package com.xcv58.graphql
 
 import com.twitter.finagle.http.Status._
-import com.twitter.finatra.http.EmbeddedHttpServer
-import com.twitter.inject.server.FeatureTest
 
 class HelloWorldFeatureTest extends FeatureTest {
 

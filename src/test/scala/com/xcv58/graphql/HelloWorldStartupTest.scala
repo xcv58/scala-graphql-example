@@ -1,8 +1,6 @@
-package com.twitter.hello
+package com.xcv58.graphql
 
 import com.google.inject.Stage
-import com.twitter.finatra.http.EmbeddedHttpServer
-import com.twitter.inject.server.FeatureTest
 
 class HelloWorldStartupTest extends FeatureTest {
 
