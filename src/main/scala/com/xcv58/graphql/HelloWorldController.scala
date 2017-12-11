@@ -55,7 +55,7 @@ class HelloWorldController extends Controller {
   }
 
   get("/graphql") { request: Request =>
-    response.ok.file("graphiql.html")
+    response.ok.file("graphql-playground.html")
   }
 
   post("/graphql") { request: GraphQLRequest =>
