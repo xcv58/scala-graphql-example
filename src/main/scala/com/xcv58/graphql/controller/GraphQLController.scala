@@ -1,17 +1,18 @@
-package com.xcv58.graphql
+package com.xcv58.graphql.controller
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.twitter.bijection.twitter_util.UtilBijections.twitter2ScalaFuture
 import com.twitter.finagle.http.Request
 import com.twitter.finatra.http.Controller
 import com.twitter.finatra.json.FinatraObjectMapper
-import org.json4s.JsonAST.{JArray, JNull}
+import com.xcv58.graphql.model.{CharacterRepo, SchemaDefinition}
+import org.json4s.JsonAST.{JArray, JNull, JObject, JValue}
 import org.json4s.jackson.JsonMethods.asJsonNode
-import org.json4s.JsonAST.{JObject, JValue}
-import sangria.marshalling.json4s.jackson._
 import sangria.execution.Executor
 import sangria.execution.deferred.DeferredResolver
+import sangria.marshalling.json4s.jackson._
 import sangria.parser.QueryParser
+
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.{Failure, Success}
 
@@ -21,7 +22,7 @@ case class GraphQLRequest(
   operationName: Option[String]
 )
 
-class HelloWorldController extends Controller {
+class GraphQLController extends Controller {
 
   // Basic JSON mapper
   val mapper: FinatraObjectMapper = FinatraObjectMapper.create()
@@ -45,16 +46,11 @@ class HelloWorldController extends Controller {
   def toJson(node: Json4sJacksonResultMarshaller.Node): JsonNode =
     asJsonNode(removeObjectNulls(node))
 
-  get("/hi") { request: Request =>
-    info("hi")
-    "Hello " + request.params.getOrElse("name", "unnamed")
+  get("/") { _: Request =>
+    response.ok.file("graphql-playground.html")
   }
 
-  post("/hi") { hiRequest: HiRequest =>
-    "Hello " + hiRequest.name + " with id " + hiRequest.id
-  }
-
-  get("/graphql") { request: Request =>
+  get("/graphql") { _: Request =>
     response.ok.file("graphql-playground.html")
   }
 

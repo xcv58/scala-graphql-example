@@ -1,4 +1,4 @@
-package com.xcv58.graphql
+package com.xcv58.graphql.model
 
 object Episode extends Enumeration {
   val NEWHOPE, EMPIRE, JEDI = Value

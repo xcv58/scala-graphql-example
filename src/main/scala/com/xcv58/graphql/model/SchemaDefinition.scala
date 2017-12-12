@@ -1,5 +1,6 @@
-package com.xcv58.graphql
+package com.xcv58.graphql.model
 
+import com.xcv58.graphql.model
 import sangria.execution.deferred.{Fetcher, HasId}
 import sangria.schema._
 
@@ -31,11 +32,11 @@ object SchemaDefinition {
         value = Episode.JEDI,
         description = Some("Released in 1983."))))
 
-  val Character: InterfaceType[CharacterRepo, Character] =
+  val Character: InterfaceType[CharacterRepo, model.Character] =
     InterfaceType(
       "Character",
       "A character in the Star Wars Trilogy",
-      () ⇒ fields[CharacterRepo, Character](
+      () ⇒ fields[CharacterRepo, model.Character](
         Field("id", StringType,
           Some("The id of the character."),
           resolve = _.value.id),
