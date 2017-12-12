@@ -7,6 +7,7 @@ import com.twitter.finatra.http.Controller
 import com.twitter.finatra.json.FinatraObjectMapper
 import com.xcv58.graphql.model.{CharacterRepo, SchemaDefinition}
 import org.json4s.JsonAST.{JArray, JNull, JObject, JValue}
+import org.json4s.jackson.JsonMethods
 import org.json4s.jackson.JsonMethods.asJsonNode
 import sangria.execution.Executor
 import sangria.execution.deferred.DeferredResolver
@@ -19,7 +20,8 @@ import scala.util.{Failure, Success}
 
 case class GraphQLRequest(
   query: String,
-  operationName: Option[String]
+  operationName: Option[String],
+  variables: Option[Map[String, Any]]
 )
 
 class GraphQLController extends Controller {
@@ -46,6 +48,12 @@ class GraphQLController extends Controller {
   def toJson(node: Json4sJacksonResultMarshaller.Node): JsonNode =
     asJsonNode(removeObjectNulls(node))
 
+  // We have problem to directly parse variables to JObject
+  def toJValue(map: Option[Map[String, Any]]): JValue = map match {
+    case Some(m) => JsonMethods.parse(mapper.writeValueAsString(m))
+    case _ => JObject()
+  }
+
   get("/") { _: Request =>
     response.ok.file("graphql-playground.html")
   }
@@ -55,6 +63,7 @@ class GraphQLController extends Controller {
   }
 
   post("/graphql") { request: GraphQLRequest =>
+    val variables: JValue = toJValue(request.variables)
     QueryParser.parse(request.query) match {
       case Success(queryAst) =>
         twitter2ScalaFuture[JValue].inverse.apply(
@@ -62,6 +71,7 @@ class GraphQLController extends Controller {
             SchemaDefinition.StarWarsSchema,
             queryAst,
             new CharacterRepo,
+            variables = variables,
             deferredResolver = DeferredResolver.fetchers(SchemaDefinition.characters)
           )
         ).map(toJson)
