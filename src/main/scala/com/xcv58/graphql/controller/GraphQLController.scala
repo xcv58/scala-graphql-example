@@ -26,11 +26,7 @@ class GraphQLController extends Controller {
     response.ok.file("graphql-playground.html")
   }
 
-  get("/graphql") { _: Request =>
-    response.ok.file("graphql-playground.html")
-  }
-
-  post("/graphql") { request: GraphQLRequest =>
+  post("/") { request: GraphQLRequest =>
     val variables: JValue = JsonUtils.toJValue(request.variables)
     QueryParser.parse(request.query) match {
       case Success(queryAst) =>
