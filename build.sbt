@@ -31,3 +31,5 @@ libraryDependencies ++= Seq(
 )
 
 testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oF")
+
+enablePlugins(JavaAppPackaging)
